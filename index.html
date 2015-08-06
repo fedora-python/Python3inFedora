@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{margin-top:15px;}
+        a.btn, h1{text-align: center;}
+        a.btn:last-child, canvas, body{margin-bottom:15px;}
+        a.btn {border-bottom-width: 0; border-radius: 0; width: 100%}
+        a.btn:first-child{border-top-left-radius: 5px; border-top-right-radius: 5px;}
+        a.btn:last-child{border-bottom-width: 1px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;}
+        pre {text-align: left;}
+        footer{text-align: center;}
+    </style>
+    <title>Python 3 in Fedora</title>
+</head>
+<body ng-controller="wheelCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+            <h1 id="wheels">Python 3 in Fedora</h1>
+                <object data="wheel.svg" type="image/svg+xml" width="380" height="380" class="center-block"></object>
+                <p>As part of the <a href="https://fedoraproject.org/wiki/Changes/Python_3_as_Default">Python 3 as the Default Implementation</a> change, we would like to reach a state where all packages in Fedora support Python 3, or - when they can't - are marked as such.
+                <h2 id='why'>Why?</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt rhoncus lacus, ac pellentesque elit eleifend vel. Integer a libero pellentesque, pulvinar odio at, ornare dui. Mauris diam arcu, consectetur ut sapien quis, tempor convallis est. Aliquam vitae egestas velit. Integer sit amet magna nisl. Interdum et malesuada fames ac</p>
+                <h2 id='help'>How you can help</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt rhoncus lacus, ac pellentesque elit eleifend vel. Integer a libero pellentesque, pulvinar odio at, ornare dui. Mauris diam arcu, consectetur ut sapien quis, tempor convallis est. Aliquam vitae egestas velit. Integer sit amet magna nisl. Interdum et malesuada fames ac</p>
+            </div>
+            <div class="col-sm-6">
+                <div class="list">
+                    <span ng-hide="packages">pythonwheels.com requires javascript to be enabled to display the list of packages.</span>
+                    <a ng-repeat="package in packages" ng-href="https://admin.fedoraproject.org/pkgdb/package/{{ package.name }}/" class="btn btn-{{ package.css_class }}" ng-attr-title="{{package.title}}">
+                        <span ng-bind="package.name"></span>
+                        <span ng-bind="package.icon"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>Code on <a href="https://github.com/meshy/pythonwheels">Github</a>, based on original <a href="https://github.com/meshy/pythonwheels">work by Meshi</a>.</p>
+            <p>Last updated <span ng-bind="last_update"></span>.</p>
+        </footer>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', [])
+        .controller('wheelCtrl', function ($scope, $http){
+            $http.get('results.json').then(function(res){
+                $scope.last_update = res.data.last_update;
+                $scope.packages = res.data.data;
+            });
+        });
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-45641000-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+</body>
+</html>
