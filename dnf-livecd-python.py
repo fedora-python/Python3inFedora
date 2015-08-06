@@ -337,7 +337,7 @@ if __name__ == '__main__':
                          'icon': u'\u2713'})
 
     now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
-    with open('python3.json', 'w') as f:
+    with open('results.json', 'w') as f:
         f.write(json.dumps({
             'data': packages,
             'last_update': now.strftime('%A, %d %B %Y, %X %Z')}))
